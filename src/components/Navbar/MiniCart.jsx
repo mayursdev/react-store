@@ -5,7 +5,7 @@ const Minicart = (props) => {
 
   return (
     <div
-      className={`mini-cart bg-white border-2 border-slate-800 p-3 fixed right-0 top-16 sm:right-5 ${
+      className={`mini-cart bg-white border border-black p-3 fixed right-0 top-12 shadow-lg sm:right-5 md:top-16 ${
         isMiniCartOpen ? null : "hidden"
       }`}
     >
@@ -13,7 +13,7 @@ const Minicart = (props) => {
         <div className="minicart-product flex space-x-2">
           <img
             src="https://cdn.shopify.com/s/files/1/0561/4380/6647/products/lifestyle-product-03.jpg?v=1625567164"
-            className="h-24 border-2"
+            className="h-24 border"
             alt=""
           />
           <div className="detail flex flex-col justify-around items-start">
@@ -24,7 +24,7 @@ const Minicart = (props) => {
         <div className="minicart-product flex space-x-2">
           <img
             src="https://cdn.shopify.com/s/files/1/0561/4380/6647/products/lifestyle-product-03.jpg?v=1625567164"
-            className="h-24 border-2"
+            className="h-24 border"
             alt=""
           />
           <div className="detail flex flex-col justify-around items-start">
@@ -35,7 +35,7 @@ const Minicart = (props) => {
         <div className="minicart-product flex space-x-2">
           <img
             src="https://cdn.shopify.com/s/files/1/0561/4380/6647/products/lifestyle-product-03.jpg?v=1625567164"
-            className="h-24 border-2"
+            className="h-24 border"
             alt=""
           />
           <div className="detail flex flex-col justify-around items-start">
@@ -44,7 +44,7 @@ const Minicart = (props) => {
           </div>
         </div>
       </div>
-      <button className="block text-center bg-slate-800 p-2 text-white font-medium uppercase text-sm">
+      <button className="block w-full text-center bg-slate-800 px-7 py-3 text-white font-medium uppercase text-sm transition-all hover:bg-slate-900">
         Go to checkout
       </button>
     </div>

@@ -9,12 +9,14 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="p-3 border-b-2 border-slate-800 fixed w-full bg-white z-50">
+      <nav className="p-3 border-b border-black fixed w-full bg-white z-50 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <div className="nav-brand font-semibold">
             <h1 className="text-lg font-bold">
-              <a href="/src">🔥REACTSTORE</a>
+              <a href="/" className="inline-block">
+                🔥REACTSTORE
+              </a>
             </h1>
           </div>
           {/* Main menu */}

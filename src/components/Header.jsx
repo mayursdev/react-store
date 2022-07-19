@@ -11,7 +11,7 @@ const Header = () => {
           </h2>
           <a
             href="#collections"
-            className="py-2 px-6 bg-slate-800 text-white text-sm uppercase md:text-base lg:text-lg"
+            className="inline-block py-3 px-5 bg-slate-800 hover:bg-slate-900 text-white text-sm uppercase transition-all md:text-base md:py-4 md:px-8"
           >
             Explore collections
           </a>
