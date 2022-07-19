@@ -1,10 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <div className="font-poppins">
-      <div>Dummy navbar</div>
+      <Navbar />
       <Outlet />
       <div>Dummy footer</div>
     </div>
