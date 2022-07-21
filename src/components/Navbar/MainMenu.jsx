@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MainMenu = (props) => {
   const { isMenuOpen } = props;
@@ -10,14 +11,20 @@ const MainMenu = (props) => {
       } md:py-2 md:flex md:flex-row md:static md:border-y-0 md:translate-y-0 md:space-x-2`}
     >
       <li>
-        <button className="font-semibold uppercase p-1 block border-b border-transparent hover:border-black">
+        <Link
+          to="/"
+          className="font-semibold uppercase p-1 block border-b border-transparent hover:border-black"
+        >
           Home
-        </button>
+        </Link>
       </li>
       <li>
-        <button className="font-semibold uppercase p-1 block border-b border-transparent hover:border-black">
+        <Link
+          to="/shop"
+          className="font-semibold uppercase p-1 block border-b border-transparent hover:border-black"
+        >
           Shop
-        </button>
+        </Link>
       </li>
     </ul>
   );

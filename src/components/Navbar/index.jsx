@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+
 import MainMenu from "./MainMenu";
 import IconsMenu from "./IconsMenu";
 import Minicart from "./MiniCart";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
@@ -14,9 +16,9 @@ const Navbar = () => {
           {/* Logo */}
           <div className="nav-brand font-semibold">
             <h1 className="text-lg font-bold">
-              <a href="/" className="inline-block">
+              <Link to="/" className="inline-block">
                 🔥REACTSTORE
-              </a>
+              </Link>
             </h1>
           </div>
           {/* Main menu */}
