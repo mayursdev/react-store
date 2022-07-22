@@ -5,7 +5,7 @@ const Minicart = (props) => {
 
   return (
     <div
-      className={`mini-cart bg-white border border-black p-3 fixed right-0 top-12 shadow-lg sm:right-5 md:top-16 ${
+      className={`mini-cart bg-white border border-black p-3 fixed right-0 top-12 shadow-md sm:right-5 md:top-16 ${
         isMiniCartOpen ? null : "hidden"
       }`}
     >

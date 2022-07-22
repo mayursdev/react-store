@@ -1,10 +1,7 @@
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  signInWithPopup,
-} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAe1msyFW10Jnf-O-YUhxcLXkGLNKZDdWM",
@@ -17,14 +14,39 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 const auth = getAuth();
+const db = getFirestore();
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
 const signInWithGooglePopup = () => {
-  return signInWithPopup(auth, provider);
+  return signInWithPopup(auth, googleProvider);
 };
 
-export { auth, signInWithGooglePopup };
+const createUserFromGoogleSignIn = async (googleSignInResp) => {
+  const { user } = googleSignInResp;
+  const userDocRef = doc(db, "users", user.uid);
+
+  const userSnapshot = await getDoc(userDocRef);
+
+  if (!userSnapshot.exists()) {
+    const { displayName, email } = user;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  return userDocRef;
+};
+
+export { auth, signInWithGooglePopup, createUserFromGoogleSignIn };

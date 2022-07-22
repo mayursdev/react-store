@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="p-3 border-b border-black fixed w-full bg-white z-50 shadow-lg">
+      <nav className="p-3 border-b border-black fixed w-full bg-white z-50 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <div className="nav-brand font-semibold">

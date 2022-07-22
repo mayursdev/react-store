@@ -1,8 +1,18 @@
 import React from "react";
-import { signInWithGooglePopup } from "../utils/firebase";
+import {
+  signInWithGooglePopup,
+  createUserFromGoogleSignIn,
+} from "../utils/firebase";
 
 const Login = () => {
-
+  const loginWithGoogle = async (e) => {
+    e.preventDefault();
+    const response = await signInWithGooglePopup();
+    if (response) {
+      const userDocRef = await createUserFromGoogleSignIn(response);
+      console.log(userDocRef);
+    }
+  };
 
   return (
     <section className="login min-h-screen pt-14">
@@ -11,32 +21,32 @@ const Login = () => {
         <p className="leading-tight text-neutral-500 text-sm mb-6">
           Please enter below account details
         </p>
-        <form className="space-y-2 mb-3">
-          <div className="login-input relative">
-            <input
-              type="text"
-              placeholder="Email"
-              className="w-full border bg-neutral-100 px-3 py-2"
-            />
-            <i className="bx bx-envelope absolute right-2 bottom-2 text-lg text-slate-500" />
+        <form className="mb-3">
+          <div className="input-group space-y-2">
+            <div className="login-input relative">
+              <input
+                type="text"
+                placeholder="Email"
+                className="w-full border bg-neutral-100 px-3 py-2 border-black"
+              />
+              <i className="bx bx-envelope absolute right-2 bottom-2 text-lg text-slate-500" />
+            </div>
+            <div className="password-input relative">
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full border bg-neutral-100 px-3 py-2 border-black"
+              />
+              <i className="bx bx-lock-alt absolute right-2 bottom-2 text-lg text-slate-500" />
+            </div>
           </div>
-          <div className="password-input relative">
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full border bg-neutral-100 px-3 py-2"
-            />
-            <i className="bx bx-lock-alt absolute right-2 bottom-2 text-lg text-slate-500" />
-          </div>
-          <div className="btn-group space-y-1">
-            <button
-              href="#"
-              className="block w-full uppercase bg-slate-800 p-3 text-white text-sm hover:bg-slate-700 font-medium"
-            >
+          <div className="btn-group space-y-1 mt-5">
+            <button className="block w-full uppercase border border-black bg-slate-800 p-3 text-white text-sm hover:bg-slate-900 font-medium">
               Sign In
             </button>
             <button
-              className="block w-full uppercase bg-orange-500 p-3 text-white text-sm hover:bg-orange-600 font-medium"
+              onClick={loginWithGoogle}
+              className="block w-full uppercase border border-black bg-orange-500 p-3 text-white text-sm hover:bg-orange-600 font-medium"
             >
               Sign In with google
             </button>
