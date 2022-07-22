@@ -1,8 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
 
+import {
+  createFirebaseAuthFromEmailPassword,
+  createUserFromFirebaseAuth,
+} from "../utils/firebase";
+
+const defaultFormFields = {
+  displayName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
 const Register = () => {
+  const [formField, setFormField] = useState(defaultFormFields);
+
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormField({ ...formField, [name]: value });
+  };
+
+  const onFormSubmit = async (e) => {
+    e.preventDefault();
+    const { displayName, email, password, confirmPassword } = formField;
+
+    if (!displayName || !email || !password || !confirmPassword) {
+      console.log("All inputs are required!");
+      return;
+    }
+    if (password !== confirmPassword) {
+      console.log("Passwords dont match!");
+      return;
+    }
+
+    try {
+      const response = await createFirebaseAuthFromEmailPassword(
+        email,
+        password
+      );
+
+      if (response) {
+        const userDocRef = await createUserFromFirebaseAuth(response, {
+          displayName,
+        });
+        console.log(userDocRef);
+      }
+    } catch (e) {
+      const errorCode = e.code;
+      console.log(errorCode);
+
+      if (errorCode === "auth/email-already-in-use") {
+        console.log("This email is already in use!");
+        return;
+      }
+      if (errorCode === "auth/invalid-email") {
+        console.log("The provided email is invalid!");
+        return;
+      }
+    }
+  };
+
   return (
     <section className="register min-h-screen pt-14">
       <div className="container mx-auto px-3 text-center sm:w-1/2 lg:w-1/3">
@@ -10,11 +69,15 @@ const Register = () => {
         <p className="leading-tight text-neutral-500 text-sm mb-6">
           Please enter below your details
         </p>
-        <form className="mb-3">
+        <form className="mb-3" onSubmit={onFormSubmit}>
           <div className="input-group space-y-2">
-            <div className="username-input relative">
+            <div className="displayName-input relative">
               <input
+                required
                 type="text"
+                onChange={onInputChange}
+                name="displayName"
+                value={formField.displayName}
                 placeholder="Display Name"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
@@ -33,9 +96,13 @@ const Register = () => {
                 />
               </svg>
             </div>
-            <div className="login-input relative">
+            <div className="email-input relative">
               <input
-                type="text"
+                required
+                type="email"
+                onChange={onInputChange}
+                name="email"
+                value={formField.email}
                 placeholder="Email"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
@@ -56,7 +123,11 @@ const Register = () => {
             </div>
             <div className="password-input relative">
               <input
+                required
                 type="password"
+                onChange={onInputChange}
+                name="password"
+                value={formField.password}
                 placeholder="Password"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
@@ -77,7 +148,11 @@ const Register = () => {
             </div>
             <div className="confirm-password-input relative">
               <input
+                required
                 type="password"
+                onChange={onInputChange}
+                name="confirmPassword"
+                value={formField.confirmPassword}
                 placeholder="Confirm password"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
@@ -98,9 +173,7 @@ const Register = () => {
             </div>
           </div>
 
-          <SubmitButton>
-            Sign Up
-          </SubmitButton>
+          <SubmitButton>Sign Up</SubmitButton>
         </form>
         <div className="text-start">
           <p className="font-medium">Already have an account?</p>

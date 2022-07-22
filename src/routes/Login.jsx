@@ -2,17 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
 import {
-  signInWithGooglePopup,
-  createUserFromGoogleSignIn,
+  createFirebaseAuthFromGooglePopup,
+  createUserFromFirebaseAuth,
 } from "../utils/firebase";
 
 const Login = () => {
   const loginWithGoogle = async (e) => {
     e.preventDefault();
-    const response = await signInWithGooglePopup();
-    if (response) {
-      const userDocRef = await createUserFromGoogleSignIn(response);
-      console.log(userDocRef);
+
+    try {
+      const authResponse = await createFirebaseAuthFromGooglePopup();
+      if (authResponse) {
+        const userDocRef = await createUserFromFirebaseAuth(authResponse);
+        console.log(userDocRef);
+      }
+    } catch (e) {
+      console.log(e.code);
     }
   };
 
@@ -71,7 +76,10 @@ const Login = () => {
           <div className="btn-group space-y-1 mt-5">
             <SubmitButton>Sign In</SubmitButton>
 
-            <SubmitButton onClick={loginWithGoogle} className='bg-orange-500 hover:bg-orange-600 text-white'>
+            <SubmitButton
+              onClick={loginWithGoogle}
+              className="bg-orange-500 hover:bg-orange-600 text-white"
+            >
               <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

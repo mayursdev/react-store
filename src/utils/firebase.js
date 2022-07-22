@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAe1msyFW10Jnf-O-YUhxcLXkGLNKZDdWM",
@@ -21,18 +25,21 @@ googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-const signInWithGooglePopup = () => {
+const createFirebaseAuthFromGooglePopup = () => {
   return signInWithPopup(auth, googleProvider);
 };
 
-const createUserFromGoogleSignIn = async (googleSignInResp) => {
-  const { user } = googleSignInResp;
+const createUserFromFirebaseAuth = async (
+  authResponse,
+  additionalInfo = {}
+) => {
+  const { user } = authResponse;
   const userDocRef = doc(db, "users", user.uid);
 
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
-    const { displayName, email } = user;
+    const { displayName, email } = { ...user, ...additionalInfo };
     const createdAt = new Date();
 
     try {
@@ -49,4 +56,15 @@ const createUserFromGoogleSignIn = async (googleSignInResp) => {
   return userDocRef;
 };
 
-export { auth, signInWithGooglePopup, createUserFromGoogleSignIn };
+const createFirebaseAuthFromEmailPassword = (email, password) => {
+  if (!email || !password) return;
+
+  return createUserWithEmailAndPassword(auth, email, password);
+};
+
+export {
+  auth,
+  createFirebaseAuthFromGooglePopup,
+  createFirebaseAuthFromEmailPassword,
+  createUserFromFirebaseAuth,
+};
