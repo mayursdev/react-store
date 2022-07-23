@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -69,10 +70,15 @@ const signInUserAuthFromEmailPassword = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
+const signOutUser = ()=>{
+  return signOut(auth);
+}
+
 export {
   auth,
   createFirebaseAuthFromGooglePopup,
   createFirebaseAuthFromEmailPassword,
   createUserFromFirebaseAuth,
   signInUserAuthFromEmailPassword,
+  signOutUser
 };

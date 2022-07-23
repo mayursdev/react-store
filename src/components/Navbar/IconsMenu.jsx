@@ -1,10 +1,20 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UsersContext } from "../../contexts/UsersContext";
+import { signOutUser } from "../../utils/firebase";
 
 const IconsMenu = (props) => {
   const { setIsMenuOpen, setIsMiniCartOpen } = props;
-  const { currentUser } = useContext(UsersContext);
+  const { currentUser, setCurrentUser } = useContext(UsersContext);
+
+  const handleLogout = async () => {
+    try {
+      await signOutUser();
+      setCurrentUser(null)
+    } catch (error) {
+      console.log(error.code);
+    }
+  };
 
   return (
     <ul className="nav-list-right flex items-center justify-center space-x-3 relative">
@@ -69,7 +79,7 @@ const IconsMenu = (props) => {
             </svg>
           </Link>
         ) : (
-          <button className="block" title="Logout">
+          <button className="block" title="Logout" onClick={handleLogout}>
             <svg
               className="w-7 h-7 text-red-500"
               fill="none"
