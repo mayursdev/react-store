@@ -15,16 +15,16 @@ const defaultFormFields = {
 };
 
 const Register = () => {
-  const [formField, setFormField] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState(defaultFormFields);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    setFormField({ ...formField, [name]: value });
+    setFormFields({ ...formFields, [name]: value });
   };
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    const { displayName, email, password, confirmPassword } = formField;
+    const { displayName, email, password, confirmPassword } = formFields;
 
     if (!displayName || !email || !password || !confirmPassword) {
       console.log("All inputs are required!");
@@ -77,7 +77,7 @@ const Register = () => {
                 type="text"
                 onChange={onInputChange}
                 name="displayName"
-                value={formField.displayName}
+                value={formFields.displayName}
                 placeholder="Display Name"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
@@ -102,7 +102,7 @@ const Register = () => {
                 type="email"
                 onChange={onInputChange}
                 name="email"
-                value={formField.email}
+                value={formFields.email}
                 placeholder="Email"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
@@ -127,7 +127,7 @@ const Register = () => {
                 type="password"
                 onChange={onInputChange}
                 name="password"
-                value={formField.password}
+                value={formFields.password}
                 placeholder="Password"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
@@ -152,7 +152,7 @@ const Register = () => {
                 type="password"
                 onChange={onInputChange}
                 name="confirmPassword"
-                value={formField.confirmPassword}
+                value={formFields.confirmPassword}
                 placeholder="Confirm password"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />

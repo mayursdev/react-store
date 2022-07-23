@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -27,6 +28,12 @@ googleProvider.setCustomParameters({
 
 const createFirebaseAuthFromGooglePopup = () => {
   return signInWithPopup(auth, googleProvider);
+};
+
+const createFirebaseAuthFromEmailPassword = (email, password) => {
+  if (!email || !password) return;
+
+  return createUserWithEmailAndPassword(auth, email, password);
 };
 
 const createUserFromFirebaseAuth = async (
@@ -56,10 +63,10 @@ const createUserFromFirebaseAuth = async (
   return userDocRef;
 };
 
-const createFirebaseAuthFromEmailPassword = (email, password) => {
+const signInUserAuthFromEmailPassword = (email, password) => {
   if (!email || !password) return;
 
-  return createUserWithEmailAndPassword(auth, email, password);
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
 export {
@@ -67,4 +74,5 @@ export {
   createFirebaseAuthFromGooglePopup,
   createFirebaseAuthFromEmailPassword,
   createUserFromFirebaseAuth,
+  signInUserAuthFromEmailPassword,
 };

@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
 import {
   createFirebaseAuthFromGooglePopup,
   createUserFromFirebaseAuth,
+  signInUserAuthFromEmailPassword,
 } from "../utils/firebase";
 
+const defaultFormFields = {
+  email: "",
+  password: "",
+};
+
 const Login = () => {
+  const [formFields, setFormFields] = useState(defaultFormFields);
+
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormFields({ ...formFields, [name]: value });
+  };
+
   const loginWithGoogle = async (e) => {
     e.preventDefault();
 
@@ -21,6 +34,38 @@ const Login = () => {
     }
   };
 
+  const loginWithEmailPassword = async (e) => {
+    e.preventDefault();
+    const { email, password } = formFields;
+
+    if (!email || !password) {
+      console.log("All inputs are required!");
+      return;
+    }
+
+    try {
+      const response = await signInUserAuthFromEmailPassword(email, password);
+      console.log(response);
+    } catch (e) {
+      switch (e.code) {
+        case "auth/wrong-password":
+          console.log("Incorrect password!");
+          break;
+        case "auth/invalid-email":
+          console.log("The provided email is invalid");
+          break;
+        case "auth/user-not-found":
+          console.log(
+            "This email is not registered! Please check the email again or register."
+          );
+          break;
+        default:
+          console.log(e.code);
+          break;
+      }
+    }
+  };
+
   return (
     <section className="login min-h-screen pt-14">
       <div className="container mx-auto px-3 text-center sm:w-1/2 lg:w-1/3">
@@ -28,11 +73,15 @@ const Login = () => {
         <p className="leading-tight text-neutral-500 text-sm mb-6">
           Please enter below account details
         </p>
-        <form className="mb-3">
+        <form className="mb-3" onSubmit={loginWithEmailPassword}>
           <div className="input-group space-y-2">
             <div className="login-input relative">
               <input
-                type="text"
+                type="email"
+                name="email"
+                value={formFields.email}
+                onChange={onInputChange}
+                required
                 placeholder="Email"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
@@ -54,6 +103,10 @@ const Login = () => {
             <div className="password-input relative">
               <input
                 type="password"
+                name="password"
+                value={formFields.password}
+                onChange={onInputChange}
+                required
                 placeholder="Password"
                 className="w-full border bg-neutral-100 px-3 py-2 border-black"
               />
