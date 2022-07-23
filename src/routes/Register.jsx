@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
+import { UsersContext } from "../contexts/UsersContext";
 
 import {
   createFirebaseAuthFromEmailPassword,
@@ -16,6 +17,7 @@ const defaultFormFields = {
 
 const Register = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
+  const { setCurrentUser } = useContext(UsersContext);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +47,9 @@ const Register = () => {
         const userDocRef = await createUserFromFirebaseAuth(response, {
           displayName,
         });
-        console.log(userDocRef);
+        const { user } = response;
+
+        setCurrentUser(user);
       }
     } catch (e) {
       const errorCode = e.code;

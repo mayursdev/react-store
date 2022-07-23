@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
 import {
@@ -6,6 +6,7 @@ import {
   createUserFromFirebaseAuth,
   signInUserAuthFromEmailPassword,
 } from "../utils/firebase";
+import { UsersContext } from "../contexts/UsersContext";
 
 const defaultFormFields = {
   email: "",
@@ -14,6 +15,7 @@ const defaultFormFields = {
 
 const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
+  const { setCurrentUser } = useContext(UsersContext);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,10 +26,12 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const authResponse = await createFirebaseAuthFromGooglePopup();
-      if (authResponse) {
-        const userDocRef = await createUserFromFirebaseAuth(authResponse);
-        console.log(userDocRef);
+      const response = await createFirebaseAuthFromGooglePopup();
+      if (response) {
+        const userDocRef = await createUserFromFirebaseAuth(response);
+        const { user } = response;
+
+        setCurrentUser(user);
       }
     } catch (e) {
       console.log(e.code);
@@ -45,7 +49,9 @@ const Login = () => {
 
     try {
       const response = await signInUserAuthFromEmailPassword(email, password);
-      console.log(response);
+      const { user } = response;
+
+      setCurrentUser(user);
     } catch (e) {
       switch (e.code) {
         case "auth/wrong-password":
