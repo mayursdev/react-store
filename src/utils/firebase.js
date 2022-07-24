@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -70,9 +71,13 @@ const signInUserAuthFromEmailPassword = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-const signOutUser = ()=>{
+const signOutUser = () => {
   return signOut(auth);
-}
+};
+
+const onAuthChange = (cb) => {
+  return onAuthStateChanged(auth, cb);
+};
 
 export {
   auth,
@@ -80,5 +85,6 @@ export {
   createFirebaseAuthFromEmailPassword,
   createUserFromFirebaseAuth,
   signInUserAuthFromEmailPassword,
-  signOutUser
+  signOutUser,
+  onAuthChange
 };

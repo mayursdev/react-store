@@ -5,12 +5,11 @@ import { signOutUser } from "../../utils/firebase";
 
 const IconsMenu = (props) => {
   const { setIsMenuOpen, setIsMiniCartOpen } = props;
-  const { currentUser, setCurrentUser } = useContext(UsersContext);
+  const { currentUser } = useContext(UsersContext);
 
   const handleLogout = async () => {
     try {
       await signOutUser();
-      setCurrentUser(null)
     } catch (error) {
       console.log(error.code);
     }

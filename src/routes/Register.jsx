@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
-import { UsersContext } from "../contexts/UsersContext";
 
 import {
   createFirebaseAuthFromEmailPassword,
@@ -17,14 +16,13 @@ const defaultFormFields = {
 
 const Register = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { setCurrentUser } = useContext(UsersContext);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const onFormSubmit = async (e) => {
+  const onRegisterFormSubmit = async (e) => {
     e.preventDefault();
     const { displayName, email, password, confirmPassword } = formFields;
 
@@ -44,12 +42,9 @@ const Register = () => {
       );
 
       if (response) {
-        const userDocRef = await createUserFromFirebaseAuth(response, {
+        await createUserFromFirebaseAuth(response, {
           displayName,
         });
-        const { user } = response;
-
-        setCurrentUser(user);
       }
     } catch (e) {
       const errorCode = e.code;
@@ -73,7 +68,7 @@ const Register = () => {
         <p className="leading-tight text-neutral-500 text-sm mb-6">
           Please enter below your details
         </p>
-        <form className="mb-3" onSubmit={onFormSubmit}>
+        <form className="mb-3" onSubmit={onRegisterFormSubmit}>
           <div className="input-group space-y-2">
             <div className="displayName-input relative">
               <input

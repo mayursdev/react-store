@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SubmitButton from "../components/SubmitButton";
 import {
@@ -6,7 +6,6 @@ import {
   createUserFromFirebaseAuth,
   signInUserAuthFromEmailPassword,
 } from "../utils/firebase";
-import { UsersContext } from "../contexts/UsersContext";
 
 const defaultFormFields = {
   email: "",
@@ -15,7 +14,6 @@ const defaultFormFields = {
 
 const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { setCurrentUser } = useContext(UsersContext);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,17 +26,14 @@ const Login = () => {
     try {
       const response = await createFirebaseAuthFromGooglePopup();
       if (response) {
-        const userDocRef = await createUserFromFirebaseAuth(response);
-        const { user } = response;
-
-        setCurrentUser(user);
+        await createUserFromFirebaseAuth(response);
       }
     } catch (e) {
       console.log(e.code);
     }
   };
 
-  const loginWithEmailPassword = async (e) => {
+  const onLoginFormSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formFields;
 
@@ -48,10 +43,7 @@ const Login = () => {
     }
 
     try {
-      const response = await signInUserAuthFromEmailPassword(email, password);
-      const { user } = response;
-
-      setCurrentUser(user);
+      await signInUserAuthFromEmailPassword(email, password);
     } catch (e) {
       switch (e.code) {
         case "auth/wrong-password":
@@ -79,7 +71,7 @@ const Login = () => {
         <p className="leading-tight text-neutral-500 text-sm mb-6">
           Please enter below account details
         </p>
-        <form className="mb-3" onSubmit={loginWithEmailPassword}>
+        <form className="mb-3" onSubmit={onLoginFormSubmit}>
           <div className="input-group space-y-2">
             <div className="login-input relative">
               <input
