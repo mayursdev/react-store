@@ -1,5 +1,5 @@
 import React from "react";
-import CollectionItem from "./CollectionItem";
+import CollectionsDirectoryItem from "./CollectionsDirectoryItem";
 
 const collectionsArr = [
   {
@@ -29,7 +29,7 @@ const collectionsArr = [
   },
 ];
 
-const Collections = () => {
+const CollectionsDirectory = () => {
   return (
     <section
       className="collections container mx-auto p-3 py-6"
@@ -38,11 +38,14 @@ const Collections = () => {
       <h2 className="section-title">Collections</h2>
       <div className="collection-list flex flex-wrap justify-center">
         {collectionsArr.map((collection) => (
-          <CollectionItem key={collection.id} collection={collection} />
+          <CollectionsDirectoryItem
+            key={collection.id}
+            collection={collection}
+          />
         ))}
       </div>
     </section>
   );
 };
 
-export default Collections;
+export default CollectionsDirectory;

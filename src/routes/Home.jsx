@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../components/Header";
-import Collections from "../components/Collections";
+import CollectionsDirectory from "../components/CollectionsDirectory";
 
 const Home = () => {
   return (
     <div>
       <Header />
-      <Collections />
+      <CollectionsDirectory />
     </div>
   );
 };

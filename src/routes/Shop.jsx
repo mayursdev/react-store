@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 const Shop = () => {
   return (
     <>
-      <header className="shop-header page-banner">
+      <header className="shop-header page-banner bg-center bg-no-repeat bg-cover">
         <h2 className="text-xl text-white">SHOP</h2>
       </header>
       <section className="section-shop px-3 p-5 min-h-screen">
