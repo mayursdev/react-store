@@ -12,8 +12,8 @@ const ProductsProvider = (props) => {
 
   useEffect(() => {
     const fetchProductsFromDB = async () => {
-      const fetchProducts = await fetchAllProductsFromDB();
-      console.log(fetchProducts);
+      // const fetchProducts = await fetchAllProductsFromDB();
+      // console.log(fetchProducts);
     };
     fetchProductsFromDB();
   }, []);
