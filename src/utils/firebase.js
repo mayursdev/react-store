@@ -6,6 +6,8 @@ import {
   setDoc,
   collection,
   writeBatch,
+  getDocs,
+  query,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -101,6 +103,21 @@ const addCollectionAndDocs = async (data, dataConfig = {}) => {
   console.log("Data uploaded to firebase.");
 };
 
+const fetchAllProductsFromDB = async () => {
+  const collectionRef = collection(db, "products");
+  const q = query(collectionRef);
+  const snapshot = await getDocs(q);
+
+  const productsMap = snapshot.docs.reduce((acc, docSnapshot) => {
+    const docData = docSnapshot.data();
+    acc[docData.collectionTitle] = docData;
+
+    return acc;
+  }, {});
+
+  return productsMap;
+};
+
 export {
   auth,
   createFirebaseAuthFromGooglePopup,
@@ -109,5 +126,6 @@ export {
   signInUserAuthFromEmailPassword,
   signOutUser,
   onAuthChange,
-  addCollectionAndDocs
+  addCollectionAndDocs,
+  fetchAllProductsFromDB,
 };
