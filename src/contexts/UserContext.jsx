@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
 import { onAuthChange } from "../utils/firebase";
 
-const UsersContext = createContext({
+const UserContext = createContext({
   currentUser: null,
   setCurrentUser: () => null,
 });
 
-const UsersProvider = (props) => {
+const UserProvider = (props) => {
   const { children } = props;
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -21,8 +21,8 @@ const UsersProvider = (props) => {
   const value = { currentUser, setCurrentUser };
 
   return (
-    <UsersContext.Provider value={value}>{children}</UsersContext.Provider>
+    <UserContext.Provider value={value}>{children}</UserContext.Provider>
   );
 };
 
-export { UsersContext, UsersProvider };
+export { UserContext, UserProvider };

@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+} from "firebase/firestore";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -20,8 +27,8 @@ const firebaseConfig = {
 };
 const firebaseApp = initializeApp(firebaseConfig);
 
-const auth = getAuth();
-const db = getFirestore();
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
@@ -79,6 +86,21 @@ const onAuthChange = (cb) => {
   return onAuthStateChanged(auth, cb);
 };
 
+const addCollectionAndDocs = async (data, dataConfig = {}) => {
+  const { collectionName, docIdKey } = dataConfig;
+  if (!collectionName || !docIdKey) return;
+
+  const batch = writeBatch(db);
+  const collectionRef = collection(db, collectionName);
+  data.forEach((item) => {
+    const docRef = doc(collectionRef, item[docIdKey]);
+    batch.set(docRef, item);
+  });
+
+  await batch.commit();
+  console.log("Data uploaded to firebase.");
+};
+
 export {
   auth,
   createFirebaseAuthFromGooglePopup,
@@ -86,5 +108,6 @@ export {
   createUserFromFirebaseAuth,
   signInUserAuthFromEmailPassword,
   signOutUser,
-  onAuthChange
+  onAuthChange,
+  addCollectionAndDocs
 };

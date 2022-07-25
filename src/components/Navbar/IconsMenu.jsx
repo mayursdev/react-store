@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { UsersContext } from "../../contexts/UsersContext";
+import { UserContext } from "../../contexts/UserContext";
 import { signOutUser } from "../../utils/firebase";
 
 const IconsMenu = (props) => {
   const { setIsMenuOpen, setIsMiniCartOpen } = props;
-  const { currentUser } = useContext(UsersContext);
+  const { currentUser } = useContext(UserContext);
 
   const handleLogout = async () => {
     try {
