@@ -108,14 +108,14 @@ const fetchAllProductsFromDB = async () => {
   const q = query(collectionRef);
   const snapshot = await getDocs(q);
 
-  const productsMap = snapshot.docs.reduce((acc, docSnapshot) => {
+  const products = snapshot.docs.reduce((acc, docSnapshot) => {
     const docData = docSnapshot.data();
-    acc[docData.collectionTitle] = docData;
+    acc[docData.title] = docData;
 
     return acc;
   }, {});
 
-  return productsMap;
+  return products;
 };
 
 export {

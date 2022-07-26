@@ -1,7 +1,10 @@
-import React from "react";
-import ProductCard from "../components/ProductCard";
+import React, { useContext } from "react";
+import CollectionsPreview from "../components/CollectionsPreview";
+import { ProductsContext } from "../contexts/ProductsContext";
 
 const Shop = () => {
+  const { products } = useContext(ProductsContext);
+
   return (
     <>
       <header className="shop-header page-banner bg-center bg-no-repeat bg-cover">
@@ -9,7 +12,7 @@ const Shop = () => {
       </header>
       <section className="section-shop px-3 p-5 min-h-screen">
         <div className="container mx-auto space-y-9">
-          <ProductCard />
+          <CollectionsPreview products={products} />
         </div>
       </section>
     </>

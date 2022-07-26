@@ -2,18 +2,19 @@ import { createContext, useState, useEffect } from "react";
 import { fetchAllProductsFromDB } from "../utils/firebase";
 
 const ProductsContext = createContext({
-  products: [],
+  products: {},
 });
 
 const ProductsProvider = (props) => {
   const { children } = props;
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({});
   const value = { products };
 
   useEffect(() => {
     const fetchProductsFromDB = async () => {
-      // const fetchProducts = await fetchAllProductsFromDB();
-      // console.log(fetchProducts);
+      const fetchedProducts = await fetchAllProductsFromDB();
+      console.log(fetchedProducts);
+      setProducts(fetchedProducts);
     };
     fetchProductsFromDB();
   }, []);

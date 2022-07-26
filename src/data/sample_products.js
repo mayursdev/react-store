@@ -1,7 +1,7 @@
 export const SAMPLE_PRODUCTS_DATA = [
   {
-    collectionTitle: "clothing",
-    collectionProducts: [
+    title: "clothing",
+    products: [
       {
         id: 1,
         name: "Pouch Pocket Hoodie Orange",
@@ -66,8 +66,8 @@ export const SAMPLE_PRODUCTS_DATA = [
   },
 
   {
-    collectionTitle: "caps",
-    collectionProducts: [
+    title: "caps",
+    products: [
       {
         id: 11,
         name: "Originals Velvet Cap",
@@ -120,8 +120,8 @@ export const SAMPLE_PRODUCTS_DATA = [
   },
 
   {
-    collectionTitle: "bags",
-    collectionProducts: [
+    title: "bags",
+    products: [
       {
         id: 19,
         name: "Fortnight Backpack",
@@ -180,8 +180,8 @@ export const SAMPLE_PRODUCTS_DATA = [
   },
 
   {
-    collectionTitle: "watches",
-    collectionProducts: [
+    title: "watches",
+    products: [
       {
         id: 28,
         name: "Prelic Nike Series",
@@ -264,8 +264,8 @@ export const SAMPLE_PRODUCTS_DATA = [
   },
 
   {
-    collectionTitle: "shoes",
-    collectionProducts: [
+    title: "shoes",
+    products: [
       {
         id: 41,
         name: "Adidas Zapatillas Calcetin",
