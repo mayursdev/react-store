@@ -19,7 +19,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/*" element={<Shop />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>

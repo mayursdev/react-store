@@ -5,27 +5,27 @@ const collectionsArr = [
   {
     id: 1,
     name: "Clothing",
-    img: "assets/collections/clothing.jpg",
+    img: "/assets/collections/clothing.jpg",
   },
   {
     id: 2,
     name: "Caps",
-    img: "assets/collections/caps.jpg",
+    img: "/assets/collections/caps.jpg",
   },
   {
     id: 3,
     name: "Bags",
-    img: "assets/collections/bags.jpg",
+    img: "/assets/collections/bags.jpg",
   },
   {
     id: 4,
     name: "Watches",
-    img: "assets/collections/watches.jpg",
+    img: "/assets/collections/watches.jpg",
   },
   {
     id: 5,
     name: "Shoes",
-    img: "assets/collections/shoes.jpg",
+    img: "/assets/collections/shoes.jpg",
   },
 ];
 

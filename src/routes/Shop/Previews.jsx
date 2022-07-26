@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import CollectionsPreview from "../components/CollectionsPreview";
-import { ProductsContext } from "../contexts/ProductsContext";
+import { ProductsContext } from "../../contexts/ProductsContext";
+import CollectionsPreview from "../../components/CollectionsPreview";
 
-const Shop = () => {
+const Previews = () => {
   const { products } = useContext(ProductsContext);
 
   return (
@@ -19,4 +19,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Previews;
