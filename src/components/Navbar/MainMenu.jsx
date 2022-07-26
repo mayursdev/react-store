@@ -6,22 +6,22 @@ const MainMenu = (props) => {
 
   return (
     <ul
-      className={`main-menu nav-list-center py-4 flex flex-col fixed left-0 right-0 items-center bg-white border-y border-black translate-y-20 -mt-2  ${
-        isMenuOpen ? null : "hidden"
-      } md:py-2 md:-mt-0 md:flex md:flex-row md:static md:border-y-0 md:translate-y-0 md:space-x-2`}
+      className={`main-menu nav-list-center flex flex-col fixed left-0 right-0 items-center bg-white border-y border-black translate-y-20 -mt-2 py-2 ${
+        isMenuOpen ? "" : "hidden"
+      } md:py-0 md:-mt-0 md:flex md:flex-row md:static md:border-y-0 md:translate-y-0 md:space-x-3`}
     >
-      <li>
+      <li className="w-full text-center py-2 md:py-0">
         <Link
           to="/"
-          className="font-semibold uppercase p-1 block border-b border-transparent hover:border-black"
+          className="font-semibold uppercase block md:border-b border-transparent hover:border-black"
         >
           Home
         </Link>
       </li>
-      <li>
+      <li className="w-full text-center py-2 md:py-0">
         <Link
           to="/shop"
-          className="font-semibold uppercase p-1 block border-b border-transparent hover:border-black"
+          className="font-semibold uppercase block md:border-b border-transparent hover:border-black"
         >
           Shop
         </Link>

@@ -7,7 +7,7 @@ const CollectionPreview = (props) => {
 
   return (
     <div className="collection-preview-wrapper">
-      <h2 className="collection-title text-2xl font-semibold uppercase mb-4">
+      <h2 className="collection-title text-2xl uppercase mb-4 px-3">
         {collection.title}
       </h2>
       <div className="collection-products flex flex-wrap">
@@ -15,7 +15,7 @@ const CollectionPreview = (props) => {
           return <ProductCard key={product.id} product={product} />;
         })}
       </div>
-      <div className="show-more-button">
+      <div className="show-more-button px-3">
         <Link
           to={`/shop/${collection.title}`}
           className="block text-indigo-500 text-lg underline"

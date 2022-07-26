@@ -13,7 +13,7 @@
     @apply text-2xl tracking-wide uppercase text-center mb-5;
   }
   .page-banner {
-    @apply w-full h-16 flex justify-center items-center -mt-7 sm:h-20 md:h-20 lg:h-24 md:-mt-2;
+    @apply w-full h-16 flex justify-center items-center sm:h-20 md:h-20 lg:h-24;
   }
 }
 

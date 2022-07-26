@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="p-3 border-b border-black fixed w-full bg-white z-50 shadow-md">
+      <nav className="p-3 py-4 border-b border-black fixed w-full bg-white z-50 shadow-md md:py-6">
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <div className="nav-brand font-semibold">
@@ -32,7 +32,7 @@ const Navbar = () => {
           <Minicart isMiniCartOpen={isMiniCartOpen} />
         </div>
       </nav>
-      <div className="pt-20"></div>
+      <div className="pt-[61px] md:pt-[77px]"></div>
     </>
   );
 };

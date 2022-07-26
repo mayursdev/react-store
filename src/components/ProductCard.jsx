@@ -4,15 +4,15 @@ const ProductCard = (props) => {
   const { product } = props;
 
   return (
-    <div className="product-wrapper pr-5 pb-2 w-1/2 sm:w-1/3 md:w-1/4">
+    <div className="product-wrapper px-3 pb-2 w-1/2 sm:w-1/3 md:w-1/4">
       <div className="product-card">
-        <div className="product-img-wrapper border border-slate-800 overflow-hidden relative group shadow">
+        <div className="product-img-wrapper border border-slate-400 overflow-hidden relative group">
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="product-img w-full group-hover:scale-105 group-hover:brightness-90 transition-all duration-500 sm:h-64 sm:object-cover sm:object-center lg:h-80 xl:h-96"
+            className="product-img w-full group-hover:scale-105 group-hover:brightness-90 transition-all duration-500 h-48 object-cover object-center sm:h-64 lg:h-72 xl:h-80"
           />
-          <button className="block w-full uppercase text-center p-3 bg-slate-800 text-white absolute bottom-0 translate-y-full group-hover:translate-y-0 transition-all duration-200 text-sm hover:bg-slate-900 sm:text-base">
+          <button className="block w-full uppercase text-center p-3 bg-slate-800 text-white absolute bottom-0 translate-y-full group-hover:translate-y-0 transition-all duration-300 text-sm hover:bg-slate-900">
             Add to cart
           </button>
         </div>

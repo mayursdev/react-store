@@ -6,7 +6,7 @@ const CollectionDirectoryItem = (props) => {
 
   return (
     <div className="collection-card-wrapper p-3 w-1/2 md:w-1/3 lg:w-1/4">
-      <div className="collection-card border border-black relative group overflow-hidden shadow">
+      <div className="collection-card border border-slate-400 relative group overflow-hidden">
         <Link to={`/shop/${collection.name.toLowerCase()}`}>
           <img
             src={collection.img}
