@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
+import MiniCartProduct from "./MiniCartProduct";
 
 const Minicart = (props) => {
   const { isMiniCartOpen } = props;
+  const { cartProducts } = useContext(CartContext);
+
+  const renderedMiniCartProducts = cartProducts.map((product) => (
+    <MiniCartProduct product={product} key={product.id} />
+  ));
 
   return (
     <div
@@ -9,40 +16,12 @@ const Minicart = (props) => {
         isMiniCartOpen ? null : "hidden"
       }`}
     >
-      <div className="minicart-products space-y-2 mb-3 h-56 pr-5 overflow-y-scroll">
-        <div className="minicart-product flex space-x-2">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0561/4380/6647/products/lifestyle-product-03.jpg?v=1625567164"
-            className="h-24 border"
-            alt=""
-          />
-          <div className="detail flex flex-col justify-around items-start">
-            <h2 className="text-sm font-medium">Pouch Pocket Hoodie Orange</h2>
-            <p className="text-sm">1 x $26</p>
-          </div>
-        </div>
-        <div className="minicart-product flex space-x-2">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0561/4380/6647/products/lifestyle-product-03.jpg?v=1625567164"
-            className="h-24 border"
-            alt=""
-          />
-          <div className="detail flex flex-col justify-around items-start">
-            <h2 className="text-sm font-medium">Pouch Pocket Hoodie Orange</h2>
-            <p className="text-sm">1 x $26</p>
-          </div>
-        </div>
-        <div className="minicart-product flex space-x-2">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0561/4380/6647/products/lifestyle-product-03.jpg?v=1625567164"
-            className="h-24 border"
-            alt=""
-          />
-          <div className="detail flex flex-col justify-around items-start">
-            <h2 className="text-sm font-medium">Pouch Pocket Hoodie Orange</h2>
-            <p className="text-sm">1 x $26</p>
-          </div>
-        </div>
+      <div className="minicart-products space-y-2 mb-3 max-h-56 w-80 pr-3 overflow-y-scroll">
+        {cartProducts.length ? (
+          renderedMiniCartProducts
+        ) : (
+          <div className="p-5 text-center">No products in cart</div>
+        )}
       </div>
       <button className="block w-full text-center bg-slate-800 px-7 py-3 text-white font-medium uppercase text-sm transition-all hover:bg-slate-900">
         Go to checkout
