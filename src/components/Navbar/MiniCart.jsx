@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import MiniCartProduct from "./MiniCartProduct";
 
@@ -23,9 +24,9 @@ const Minicart = (props) => {
           <div className="p-5 text-center">No products in cart</div>
         )}
       </div>
-      <button className="block w-full text-center bg-slate-800 px-7 py-3 text-white font-medium uppercase text-sm transition-all hover:bg-slate-900">
+      <Link to='/checkout' className="block w-full text-center bg-slate-800 px-7 py-3 text-white font-medium uppercase text-sm transition-all hover:bg-slate-900">
         Go to checkout
-      </button>
+      </Link>
     </div>
   );
 };

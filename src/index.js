@@ -6,6 +6,7 @@ import App from "./App";
 import Home from "./routes/Home";
 import Shop from "./routes/Shop";
 import Login from "./routes/Login";
+import Checkout from "./routes/Checkout";
 import "./index.css";
 import Register from "./routes/Register";
 import { UserProvider } from "./contexts/UserContext";
@@ -24,6 +25,7 @@ root.render(
               <Route path="/shop/*" element={<Shop />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/checkout" element={<Checkout />} />
             </Route>
           </Routes>
         </CartProvider>
