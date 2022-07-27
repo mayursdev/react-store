@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../contexts/CartContext";
 import { UserContext } from "../../contexts/UserContext";
 import { signOutUser } from "../../utils/firebase";
 
 const IconsMenu = (props) => {
   const { setIsMenuOpen, setIsMiniCartOpen } = props;
   const { currentUser } = useContext(UserContext);
+  const { cartCount } = useContext(CartContext);
 
   const handleLogout = async () => {
     try {
@@ -42,7 +44,7 @@ const IconsMenu = (props) => {
         className="mini-cart-icon relative"
         onClick={() => setIsMiniCartOpen((prev) => !prev)}
       >
-        <button href="#" className="relative block">
+        <button className="relative block">
           <svg
             className="w-7 h-7"
             fill="none"
@@ -57,6 +59,9 @@ const IconsMenu = (props) => {
               d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
             />
           </svg>
+          <div className="cart-counter absolute -bottom-1.5 left-4 text-xs bg-slate-800 text-white rounded-full h-5 flex items-center justify-center px-1.5">
+            { cartCount }
+          </div>
         </button>
       </li>
       <li>
