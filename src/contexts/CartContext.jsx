@@ -8,6 +8,8 @@ const CartContext = createContext({
   removeProductFromCart: () => {},
   cartCount: 0,
   cartSubTotal: 0,
+  isMiniCartOpen: false,
+  setIsMiniCartOpen: () => {},
 });
 
 const CartProvider = (props) => {
@@ -15,6 +17,7 @@ const CartProvider = (props) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [cartSubTotal, setCartSubTotal] = useState(0);
+  const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
 
   useEffect(() => {
     const newCartCount = cartProducts.reduce((acc, curr) => {
@@ -74,6 +77,8 @@ const CartProvider = (props) => {
     subtractProductFromCart,
     removeProductFromCart,
     cartSubTotal,
+    isMiniCartOpen,
+    setIsMiniCartOpen,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

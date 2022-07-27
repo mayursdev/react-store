@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import MainMenu from "./MainMenu";
 import IconsMenu from "./IconsMenu";
 import Minicart from "./MiniCart";
-import { Link } from "react-router-dom";
+import { CartContext } from "../../contexts/CartContext";
 
 const Navbar = () => {
-  const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMiniCartOpen } = useContext(CartContext);
 
   return (
     <>
@@ -22,12 +23,9 @@ const Navbar = () => {
             </h1>
           </div>
           {/* Main menu */}
-          <MainMenu isMenuOpen={isMenuOpen} />
+          <MainMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           {/* Icons menu */}
-          <IconsMenu
-            setIsMenuOpen={setIsMenuOpen}
-            setIsMiniCartOpen={setIsMiniCartOpen}
-          />
+          <IconsMenu setIsMenuOpen={setIsMenuOpen} />
           {/* mini cart */}
           <Minicart isMiniCartOpen={isMiniCartOpen} />
         </div>

@@ -5,9 +5,10 @@ import { UserContext } from "../../contexts/UserContext";
 import { signOutUser } from "../../utils/firebase";
 
 const IconsMenu = (props) => {
-  const { setIsMenuOpen, setIsMiniCartOpen } = props;
+  const { setIsMenuOpen } = props;
   const { currentUser } = useContext(UserContext);
-  const { cartCount } = useContext(CartContext);
+  const { cartCount, setIsMiniCartOpen } =
+    useContext(CartContext);
 
   const handleLogout = async () => {
     try {
@@ -60,9 +61,10 @@ const IconsMenu = (props) => {
             />
           </svg>
           <div className="cart-counter absolute -bottom-1.5 left-4 text-xs bg-slate-800 text-white rounded-full h-5 flex items-center justify-center px-1.5">
-            { cartCount }
+            {cartCount}
           </div>
         </button>
+
       </li>
       <li>
         {!currentUser ? (
